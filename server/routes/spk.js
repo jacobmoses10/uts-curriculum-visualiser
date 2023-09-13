@@ -3,7 +3,7 @@ import db from "../conn.js";
 
 const router = express.Router();
 
-// Get all SPKSs
+// Get all SPKs
 router.get("/", async (req, res) => {
   let collection = await db.collection("SPKs");
   let results = await collection.find({}).toArray();
