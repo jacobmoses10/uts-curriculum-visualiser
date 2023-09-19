@@ -5,10 +5,10 @@ import logo from "../img/uts-logo.png"
 
 export default function NavBar() {
   return(
-    <div>
-      <nav>
+    <div className="container-fluid">
+      <nav className="navbar">
         <NavLink className="navbar-brand" to="/">
-          <img style={{"width" : 15 + '%'}} src={logo} alt="UTS"></img>
+          <img src={logo} width="250" alt="UTS"></img>
         </NavLink>
       </nav>
     </div>

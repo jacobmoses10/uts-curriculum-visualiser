@@ -4,7 +4,7 @@ A curriculum visualiser built for UTS Engineering Capstone.
 Create a `.env` file and add MongoDB Atlas URI and Server Port.
 ```
 ATLAS_URI=
-PORT=
+PORT=4000
 ```
 
 Start the server:
