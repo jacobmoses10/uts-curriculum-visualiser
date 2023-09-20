@@ -46,7 +46,7 @@ export default function Course() {
         <dd class="col-sm-9">{course.studyAreaId}: {course.studyAreaName}</dd>
         <dt class="col-sm-3">Stage</dt>
         <dd class="col-sm-9">{course.stage}</dd>
-          
+        
       </dl>
     </div>
   );
