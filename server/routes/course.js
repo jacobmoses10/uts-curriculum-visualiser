@@ -3,10 +3,28 @@ import db from "../conn.js";
 
 const router = express.Router();
 
-// Get all Courses
+// Get all/searched Courses
 router.get("/", async (req, res) => {
   let courses = await db.collection("Courses");
-  let results = await courses.find({}).toArray();
+  const { search } = req.query;
+  let results;
+  if (search) {
+    results = await courses.aggregate(
+      [
+        {
+          '$search': {
+            'index': 'search-courses', 
+            'autocomplete': {
+              'query': search,
+              'path': 'searchTitle',
+            }
+          }
+        }
+      ]
+    ).toArray();
+  } else {
+    results = await courses.find({}).toArray();
+  }  
   res.send(results).status(200);
 });
 
