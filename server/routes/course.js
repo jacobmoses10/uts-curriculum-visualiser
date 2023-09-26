@@ -12,34 +12,45 @@ router.get("/", async (req, res) => {
 
 // Get Course by ID
 router.get("/:courseId", async (req, res) => {
-  let courses = await db.collection("Courses");
-  let query = {courseId: req.params.courseId};
-  let result = await courses.findOne(query);
+  let courseDb = await db.collection("Courses");
+  let courseQuery = {courseId: req.params.courseId};
+  let result = await courseDb.findOne(courseQuery);
 
   if (!result) {
     res.send("Course not found").status(404);
   } else {
     
     // Find and add Spks to Course
-    let courseSpk = await db.collection("Course-SPK");
-    let spksObject = await courseSpk.find(query).toArray();
-    if (spksObject.length) {
-      let spkIds = [];
-      spksObject.forEach((spk) => {
-        spkIds.push(spk.spkId);
+    let courseSpkDb = await db.collection("Course-SPK");
+    let couseSpkResult = await courseSpkDb.find(query).toArray();
+    
+    if (couseSpkResult.length) {
+      let spkArray = [];
+      let spkDb = await db.collection("SPKs");
+      
+      couseSpkResult.forEach(async (courseSpk) => {
+        let spkQuery = {spkId: courseSpk.spkId};
+        let spkResult = await spkDb.findOne(spkQuery);
+        spkArray.push(spkResult);
       });
-      result.spkIds = spkIds;
+      
+      result.spks = spkArray;
     }
     
     // Find and add Subjects to Course
-    let courseSubject = await db.collection("Course-Subject");
-    let subjectsObject = await courseSubject.find(query).toArray();
-    if (subjectsObject.length) {
-      let subjectIds = [];
-      subjectsObject.forEach((subject) => {
-        subjectIds.push(subject.subjectId);
+    let courseSubjectDb = await db.collection("Course-Subject");
+    let courseSubjectResult = await courseSubjectDb.find(query).toArray();
+    
+    if (courseSubjectResult.length) {
+      let subjectArray = [];
+      let subjectDb = await db.collection("Subjects");
+
+      courseSubjectResult.forEach(async (courseSubject) => {
+        let subjectQuery = {spkId: courseSubject.spkId};
+        let subjectResult = await subjectDb.findOne(subjectQuery);
+        subjectArray.push(subjectResult);
       });
-      result.subjectIds = subjectIds;
+      result.subjects = subjectArray;
     }
     
     res.send(result).status(200);
