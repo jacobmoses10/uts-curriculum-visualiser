@@ -15,31 +15,26 @@ const Course = (props) => (
 
 export default function CourseList() {
   const [courses, setCourses] = useState([]);
+  const [key, setKey] = useState("");
 
   useEffect(() => {
+
     async function getCourses() {
-      const response = await fetch(`http://localhost:4000/course/`);
-
-      if (!response.ok) {
-        const message = `An error occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-
+      const response = await fetch(`http://localhost:4000/course?search=${key}`);
       const courses = await response.json();
       setCourses(courses);
     }
     
     getCourses();
     return;
-  }, [courses.length]);
+  }, [key]);
 
   function courseList() {
     return courses.map((course)=> {
       return (
         <Course
           course={course}
-          key={course.courseId}
+          key={course.fullTitle}
         />
       );
     });
@@ -47,10 +42,11 @@ export default function CourseList() {
 
   return (
     <div>
-      <form className="input-group mb-3" role="search">
-          <input className="form-control" type="search" placeholder="Search" aria-label="Search"/>
+      <form className="input-group mb-3">
+          <input className="form-control" placeholder="Search" aria-label="Search" value={key}
+            onChange={(e) => setKey(e.target.value)}/>
           <button className="btn btn-outline-success" type="submit">Search</button>
-        </form>
+      </form>
       <h3>Course List</h3>
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>

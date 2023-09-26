@@ -19,6 +19,15 @@ router.get("/", async (req, res) => {
               'path': 'searchTitle',
             }
           }
+        }, {
+          '$limit': 5
+        }, {
+          '$project': {
+            'courseId': 1, 
+            'fullTitle': 1, 
+            'courseTypeName': 1, 
+            'orgName': 1,
+          }
         }
       ]
     ).toArray();
