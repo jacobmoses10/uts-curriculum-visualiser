@@ -12,36 +12,45 @@ router.get("/", async (req, res) => {
 
 // Get SPK by ID
 router.get("/:spkId", async (req, res) => {
-  let spks = await db.collection("SPKs");
+  let spkDb = await db.collection("SPKs");
   let query = {spkId: req.params.spkId};
-  let result = await spks.findOne(query);
+  let result = await spkDb.findOne(query);
 
   if (!result) {
     res.send("SPK not found").status(404);
   } else {
     
-    // Find and add SPKs to SPK
-    let spkSpk = await db.collection("SPK-SPK");
-    let spksObject = await spkSpk.find(query).toArray();
-    if (spksObject.length) {
-      let spkIds = [];
-      spksObject.forEach((spk) => {
-        spkIds.push(spk.spkId);
+    // Find and add Spks to Course
+    let spkSpkDb = await db.collection("SPK-SPK");
+    let spkSpkResult = await spkSpkDb.find(query).toArray();
+    
+    if (spkSpkResult.length) {
+      let spkIdArray = [];
+      spkSpkResult.forEach((spkSpk) => {
+        spkIdArray.push(spkSpk.spkId2);
       });
-      result.spkIds = spkIds;
+
+      let spkQuery = {spkId: {$in: spkIdArray}};
+      let spkResult = await spkDb.find(spkQuery).toArray();
+      result.spks = spkResult;
     }
     
-    // Find and add Subjects to SPK
-    let spkSubject = await db.collection("SPK-Subject");
-    let subjectsObject = await spkSubject.find(query).toArray();
-    if (subjectsObject.length) {
-      let subjectIds = [];
-      subjectsObject.forEach((subject) => {
-        subjectIds.push(subject.subjectId);
+    // Find and add Subjects to Course
+    let spkSubjectDb = await db.collection("SPK-Subject");
+    let spkSubjectResult = await spkSubjectDb.find(query).toArray();
+
+    if (spkSubjectResult.length) {
+      let subjectIdArray = [];
+      spkSubjectResult.forEach((spkSubject) => {
+        subjectIdArray.push(spkSubject.subjectId);
       });
-      result.subjectIds = subjectIds;
+      
+      let subjectDb = await db.collection("Subjects");
+      let subjectQuery = {subjectId: {$in: subjectIdArray}};
+      let subjectResult = await subjectDb.find(subjectQuery).toArray();
+      result.subjects = subjectResult;
     }
-    
+
     res.send(result).status(200);
   }
 });

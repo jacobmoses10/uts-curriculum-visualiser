@@ -22,35 +22,34 @@ router.get("/:courseId", async (req, res) => {
     
     // Find and add Spks to Course
     let courseSpkDb = await db.collection("Course-SPK");
-    let couseSpkResult = await courseSpkDb.find(query).toArray();
+    let couseSpkResult = await courseSpkDb.find(courseQuery).toArray();
     
     if (couseSpkResult.length) {
-      let spkArray = [];
-      let spkDb = await db.collection("SPKs");
-      
-      couseSpkResult.forEach(async (courseSpk) => {
-        let spkQuery = {spkId: courseSpk.spkId};
-        let spkResult = await spkDb.findOne(spkQuery);
-        spkArray.push(spkResult);
+      let spkIdArray = [];
+      couseSpkResult.forEach((courseSpk) => {
+        spkIdArray.push(courseSpk.spkId);
       });
       
-      result.spks = spkArray;
+      let spkDb = await db.collection("SPKs");
+      let spkQuery = {spkId: {$in: spkIdArray}};
+      let spkResult = await spkDb.find(spkQuery).toArray();
+      result.spks = spkResult;
     }
     
     // Find and add Subjects to Course
     let courseSubjectDb = await db.collection("Course-Subject");
-    let courseSubjectResult = await courseSubjectDb.find(query).toArray();
+    let courseSubjectResult = await courseSubjectDb.find(courseQuery).toArray();
     
     if (courseSubjectResult.length) {
-      let subjectArray = [];
-      let subjectDb = await db.collection("Subjects");
-
-      courseSubjectResult.forEach(async (courseSubject) => {
-        let subjectQuery = {spkId: courseSubject.spkId};
-        let subjectResult = await subjectDb.findOne(subjectQuery);
-        subjectArray.push(subjectResult);
+      let subjectIdArray = [];
+      courseSubjectResult.forEach((courseSubject) => {
+        subjectIdArray.push(courseSubject.subjectId);
       });
-      result.subjects = subjectArray;
+
+      let subjectDb = await db.collection("Subjects");
+      let subjectQuery = {subjectId: {$in: subjectIdArray}};
+      let subjectResult = await subjectDb.find(subjectQuery).toArray();
+      result.subjects = subjectResult;
     }
     
     res.send(result).status(200);
