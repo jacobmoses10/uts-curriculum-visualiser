@@ -20,7 +20,7 @@ router.get("/:subjectId", async (req, res) => {
     res.send("Subject not found").status(404);
   } else {
     
-    // Find and add Prerequisites to Subject
+    // Find and add Pre-Requisites to Subject
     let prereqDb = await db.collection("Prerequisites");
     let queryCol2 = {subjectId2: req.params.subjectId};
     let prereqResult = await prereqDb.find(queryCol2).toArray();
