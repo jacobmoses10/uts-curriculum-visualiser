@@ -20,7 +20,7 @@ router.get("/:spkId", async (req, res) => {
     res.send("SPK not found").status(404);
   } else {
     
-    // Find and add Spks to Course
+    // Find and add Spks to SPK
     let spkSpkDb = await db.collection("SPK-SPK");
     let spkSpkResult = await spkSpkDb.find(query).toArray();
     
@@ -35,7 +35,7 @@ router.get("/:spkId", async (req, res) => {
       result.spks = spkResult;
     }
     
-    // Find and add Subjects to Course
+    // Find and add Subjects to SPK
     let spkSubjectDb = await db.collection("SPK-Subject");
     let spkSubjectResult = await spkSubjectDb.find(query).toArray();
 

@@ -21,14 +21,33 @@ router.get("/:subjectId", async (req, res) => {
   } else {
     
     // Find and add Prerequisites to Subject
-    let prereqs = await db.collection("Prerequisites");
-    let prereqObject = await prereqs.find(query).toArray();
-    if (prereqObject.length) {
-      let prereqIds = [];
-      prereqObject.forEach((prereq) => {
-        prereqIds.push(prereq.subjectId2);
+    let prereqDb = await db.collection("Prerequisites");
+    let queryCol2 = {subjectId2: req.params.subjectId};
+    let prereqResult = await prereqDb.find(queryCol2).toArray();
+    
+    if (prereqResult.length) {
+      let prereqIdArray = [];
+      prereqResult.forEach((prereq) => {
+        prereqIdArray.push(prereq.subjectId);
       });
-      result.prereqIds = prereqIds;
+      
+      let prereqQuery = {subjectId: {$in: prereqIdArray}};
+      let prereqSubjectResult = await subjects.find(prereqQuery).toArray();
+      result.prereqs = prereqSubjectResult;
+    }
+
+    // Find and add Post-Requisites to Subject
+    let postreqResult = await prereqDb.find(query).toArray();
+    
+    if (postreqResult.length) {
+      let postreqIdArray = [];
+      postreqResult.forEach((postreq) => {
+        postreqIdArray.push(postreq.subjectId2);
+      });
+      
+      let postreqQuery = {subjectId: {$in: postreqIdArray}};
+      let postreqSubjectResult = await subjects.find(postreqQuery).toArray();
+      result.postreqs = postreqSubjectResult;
     }
     
     res.send(result).status(200);
