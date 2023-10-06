@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import Cards from "./cards";
 
 export default function Subject() {
   
@@ -51,6 +52,9 @@ export default function Subject() {
         <dt class="col-sm-3">Stage</dt>
         <dd class="col-sm-9">{subject.stage}</dd> 
       </dl>
+
+      <Cards data = {subject}/>
+
     </div>
   );
 }

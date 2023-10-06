@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import Visualiser from "./visualiser";
+import Cards from "./cards";
+// import Visualiser from "./visualiser";
 
 export default function Course() {
   
@@ -49,8 +50,10 @@ export default function Course() {
         <dd className="col-sm-9">{course.stage}</dd> 
       </dl>
 
-      <Visualiser data = {course}/>
+      <Cards data = {course}/>
 
     </div>
   );
 }
+
+// <Visualiser data = {course}/>

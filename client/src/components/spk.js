@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import Cards from "./cards";
 
 export default function Spk() {
   
@@ -43,6 +44,9 @@ export default function Spk() {
         <dt class="col-sm-3">Stage</dt>
         <dd class="col-sm-9">{spk.stage}</dd> 
       </dl>
+
+      <Cards data = {spk}/>
+    
     </div>
   );
 }

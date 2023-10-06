@@ -36,12 +36,7 @@ export default function CourseList() {
 
   function courseList() {
     return courses.map((course)=> {
-      return (
-        <Course
-          course={course}
-          key={course.courseId}
-        />
-      );
+      return (<Course course={course} key={course.courseId}/>);
     });
   }
 
