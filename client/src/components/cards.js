@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 const Spk = (props) => (
   <div className="col-md-3">
-    <div className="card border-primary shadow" style={{width: "18rem"}}>
-      <div className="card-header">{props.spk.spkTypeName}</div>
+    <div className="card shadow" style={{width: "18rem"}}>
+      <div className="card-header bg-primary text-white">{props.spk.spkTypeName}</div>
       <div className="card-body">
         <h6 className="card-subtitle mb-2 text-body-secondary">{props.spk.spkId}</h6>
         <h5 className="card-title">{props.spk.fullTitle}</h5>
-        <p className="card-text">{props.spk.orgName}.</p>
-        <Link className="btn btn-outline-primary" to={`/spk/${props.spk.spkId}`}>View</Link>
+        <p className="card-text">{props.spk.orgName}</p>
+        <Link className="btn btn-outline-primary" to={`/spk/${props.spk.spkId}`}>View</Link> 
       </div>
     </div>
   </div>
@@ -17,12 +17,12 @@ const Spk = (props) => (
 
 const Subject = (props) => (
   <div className="col-md-3">
-    <div className="card border-primary shadow" style={{width: "18rem"}}>
-      <div className="card-header">{props.subject.spkTypeName}</div>
+    <div className="card shadow" style={{width: "18rem"}}>
+      <div className="card-header bg-success text-white">{props.subject.spkTypeName}</div>
       <div className="card-body">
         <h6 className="card-subtitle mb-2 text-body-secondary">{props.subject.subjectId}</h6>
         <h5 className="card-title">{props.subject.fullTitle}</h5>
-        <p className="card-text">{props.subject.orgName}.</p>
+        <p className="card-text">{props.subject.orgName}</p>
         <Link className="btn btn-outline-primary" to={`/subject/${props.subject.subjectId}`}>View</Link>
       </div>
     </div>
@@ -37,14 +37,14 @@ export default function Cards(data) {
         return (<Spk spk={spk} key={spk.spkId}/>);
       });
       return (
-        <div>
+        <div className="container gy-5">
           <h4>SPKs</h4>
           <div className="row gy-5 justify-content-start">
             {spkMap}
           </div>
         </div> 
       );
-    } return null;
+    }
   }
 
   function subjectCards() {
@@ -53,14 +53,14 @@ export default function Cards(data) {
         return (<Subject subject={subject} key={subject.subjectId}/>);
       });
       return (
-        <div>
+        <div className="container gy-5">
           <h4>Subjects</h4>
           <div className="row gy-5 justify-content-start">
             {subjectMap}
           </div>
         </div> 
       );
-    } return null;
+    }
   }
   
   function prereqCards() {
@@ -69,14 +69,14 @@ export default function Cards(data) {
         return (<Subject subject={subject} key={subject.subjectId}/>);
       });
       return (
-        <div>
+        <div className="container gy-5">
           <h4>Prerequisites For This Subject</h4>
           <div className="row gy-5 justify-content-start">
             {prereqMap}
           </div>
         </div> 
       );
-    } return null;
+    }
   }
 
   function postreqCards() {
@@ -85,21 +85,20 @@ export default function Cards(data) {
         return (<Subject subject={subject} key={subject.subjectId}/>);
       });
       return (
-        <div>
+        <div className="container gy-5">
           <h4>This Subject Is A Prequisite To</h4>
           <div className="row gy-5 justify-content-start">
             {postreqMap}
           </div>
         </div> 
       );
-    } return null;
+    }
   }
-  
 
   return (
     <div className="row">
-        {spkCards()}
         {subjectCards()}
+        {spkCards()}
         {prereqCards()}
         {postreqCards()}
     </div>
