@@ -21,7 +21,7 @@ export default function Spk() {
     }
     getSpk();
     return;
-  }, [spk, params.id]);
+  }, [params.id]);
 
 
   return(

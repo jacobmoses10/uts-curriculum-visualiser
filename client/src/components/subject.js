@@ -21,7 +21,7 @@ export default function Subject() {
     }
     getSubject();
     return;
-  }, [subject, params.id]);
+  }, [params.id]);
 
 
   return(

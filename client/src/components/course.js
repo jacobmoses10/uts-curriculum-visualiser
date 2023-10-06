@@ -22,7 +22,7 @@ export default function Course() {
     }
     getCourse();
     return;
-  }, [course, params.id]);
+  }, [params.id]);
 
 
   return(
