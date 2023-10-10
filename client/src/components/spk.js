@@ -28,21 +28,21 @@ export default function Spk() {
   return(
     <div>
       <h1>{spk.spkId} {spk.fullTitle}</h1>
-      <dl class="row">
-        <dt class="col-sm-3">Version</dt>
-        <dd class="col-sm-9">v{spk.spkv}</dd>
-        <dt class="col-sm-3">Type</dt>
-        <dd class="col-sm-9">{spk.spkTypeId}: {spk.spkTypeName}</dd>
-        <dt class="col-sm-3">Credit Points</dt>
-        <dd class="col-sm-9">{spk.cpv}</dd>
-        <dt class="col-sm-3">Faculty</dt>
-        <dd class="col-sm-9">{spk.orgName}</dd>
-        <dt class="col-sm-3">Field of Education</dt>
-        <dd class="col-sm-9">{spk.primaryFoeName}</dd>
-        <dt class="col-sm-3">Study Area</dt>
-        <dd class="col-sm-9">{spk.studyAreaId}: {spk.studyAreaName}</dd>
-        <dt class="col-sm-3">Stage</dt>
-        <dd class="col-sm-9">{spk.stage}</dd> 
+      <dl className="row">
+        <dt className="col-sm-3">Version</dt>
+        <dd className="col-sm-9">v{spk.spkv}</dd>
+        <dt className="col-sm-3">Type</dt>
+        <dd className="col-sm-9">{spk.spkTypeId}: {spk.spkTypeName}</dd>
+        <dt className="col-sm-3">Credit Points</dt>
+        <dd className="col-sm-9">{spk.cpv}</dd>
+        <dt className="col-sm-3">Faculty</dt>
+        <dd className="col-sm-9">{spk.orgName}</dd>
+        <dt className="col-sm-3">Field of Education</dt>
+        <dd className="col-sm-9">{spk.primaryFoeName}</dd>
+        <dt className="col-sm-3">Study Area</dt>
+        <dd className="col-sm-9">{spk.studyAreaId}: {spk.studyAreaName}</dd>
+        <dt className="col-sm-3">Stage</dt>
+        <dd className="col-sm-9">{spk.stage}</dd> 
       </dl>
 
       <Cards data = {spk}/>

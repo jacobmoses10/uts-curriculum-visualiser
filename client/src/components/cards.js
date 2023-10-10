@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 
 const Spk = (props) => (
   <div className="col-md-3">
-    <div className="card shadow" style={{width: "18rem"}}>
-      <div className="card-header bg-primary text-white">{props.spk.spkTypeName}</div>
+    <div className="card" style={{width: "18rem"}}>
+      <div className="card-header bg-primary text-white position-relative">
+        {props.spk.spkTypeName}
+        <span class="badge rounded-pill text-bg-light position-absolute end-0 me-2">{props.spk.cpv}cp</span> 
+      </div> 
       <div className="card-body">
         <h6 className="card-subtitle mb-2 text-body-secondary">{props.spk.spkId}</h6>
         <h5 className="card-title">{props.spk.fullTitle}</h5>
@@ -18,7 +21,10 @@ const Spk = (props) => (
 const Subject = (props) => (
   <div className="col-md-3">
     <div className="card shadow" style={{width: "18rem"}}>
-      <div className="card-header bg-success text-white">{props.subject.spkTypeName}</div>
+      <div className="card-header bg-success text-white">
+        {props.subject.spkTypeName}
+        <span class="badge rounded-pill text-bg-light position-absolute end-0 me-2">{props.subject.cpv}cp</span> 
+      </div>
       <div className="card-body">
         <h6 className="card-subtitle mb-2 text-body-secondary">{props.subject.subjectId}</h6>
         <h5 className="card-title">{props.subject.fullTitle}</h5>

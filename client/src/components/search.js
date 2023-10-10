@@ -45,7 +45,7 @@ export default function CourseList() {
       <form className="input-group mb-3" role="search">
           <input className="form-control" type="search" placeholder="Search" aria-label="Search"/>
           <button className="btn btn-outline-success" type="submit">Search</button>
-        </form>
+      </form>
       <h3>Course List</h3>
       <table className="table table-striped" style={{ marginTop: 20 }}>
         <thead>

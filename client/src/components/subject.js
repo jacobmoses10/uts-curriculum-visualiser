@@ -28,29 +28,29 @@ export default function Subject() {
   return(
     <div>
       <h1>{subject.subjectId} {subject.fullTitle}</h1>
-      <dl class="row">
-        <dt class="col-sm-3">Version</dt>
-        <dd class="col-sm-9">v{subject.subjectv}</dd>
-        <dt class="col-sm-3">Type</dt>
-        <dd class="col-sm-9">{subject.spkTypeId}: {subject.spkTypeName}</dd>
-        <dt class="col-sm-3">Credit Points</dt>
-        <dd class="col-sm-9">{subject.cpv}</dd>
-        <dt class="col-sm-3">Faculty</dt>
-        <dd class="col-sm-9">{subject.orgName}</dd>
-        <dt class="col-sm-3">Field of Education</dt>
-        <dd class="col-sm-9">{subject.primaryFoeName}</dd>
-        <dt class="col-sm-3">Study Area</dt>
-        <dd class="col-sm-9">{subject.studyAreaId}: {subject.studyAreaName}</dd>
-        <dt class="col-sm-3">Study Type</dt>
-        <dd class="col-sm-9">{subject.studyType}</dd>
-        <dt class="col-sm-3">Grading</dt>
-        <dd class="col-sm-9">{subject.grading}</dd>
-        <dt class="col-sm-3">Study Type</dt>
-        <dd class="col-sm-9">{subject.studyType}</dd>
-        <dt class="col-sm-3">Fee Level</dt>
-        <dd class="col-sm-9">{subject.feeLevelType} ({subject.feeLevelCode})</dd>
-        <dt class="col-sm-3">Stage</dt>
-        <dd class="col-sm-9">{subject.stage}</dd> 
+      <dl className="row">
+        <dt className="col-sm-3">Version</dt>
+        <dd className="col-sm-9">v{subject.subjectv}</dd>
+        <dt className="col-sm-3">Type</dt>
+        <dd className="col-sm-9">{subject.spkTypeId}: {subject.spkTypeName}</dd>
+        <dt className="col-sm-3">Credit Points</dt>
+        <dd className="col-sm-9">{subject.cpv}</dd>
+        <dt className="col-sm-3">Faculty</dt>
+        <dd className="col-sm-9">{subject.orgName}</dd>
+        <dt className="col-sm-3">Field of Education</dt>
+        <dd className="col-sm-9">{subject.primaryFoeName}</dd>
+        <dt className="col-sm-3">Study Area</dt>
+        <dd className="col-sm-9">{subject.studyAreaId}: {subject.studyAreaName}</dd>
+        <dt className="col-sm-3">Study Type</dt>
+        <dd className="col-sm-9">{subject.studyType}</dd>
+        <dt className="col-sm-3">Grading</dt>
+        <dd className="col-sm-9">{subject.grading}</dd>
+        <dt className="col-sm-3">Study Type</dt>
+        <dd className="col-sm-9">{subject.studyType}</dd>
+        <dt className="col-sm-3">Fee Level</dt>
+        <dd className="col-sm-9">{subject.feeLevelType} ({subject.feeLevelCode})</dd>
+        <dt className="col-sm-3">Stage</dt>
+        <dd className="col-sm-9">{subject.stage}</dd> 
       </dl>
 
       <Cards data = {subject}/>

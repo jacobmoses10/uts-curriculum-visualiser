@@ -5,12 +5,10 @@ import logo from "../img/uts-logo-white.png"
 
 export default function NavBar() {
   return(
-    <div className="container-fluid bg-black">
-      <nav className="navbar">
+      <nav className="navbar bg-primary" data-bs-theme="dark">
         <NavLink className="navbar-brand" to="/">
-          <img src={logo} width="150" alt="UTS"></img>
+          <img src={logo} width="110" alt="UTS"></img>
         </NavLink>
       </nav>
-    </div>
   );
 }
