@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Spk = (props) => (
   <div className="col-md-3">
-    <div className="card" style={{width: "18rem"}}>
+    <div className="card shadow" style={{width: "18rem"}}>
       <div className="card-header bg-primary text-white position-relative">
         {props.spk.spkTypeName}
         <span class="badge rounded-pill text-bg-light position-absolute end-0 me-2">{props.spk.cpv}cp</span> 
