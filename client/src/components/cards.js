@@ -6,7 +6,7 @@ const Spk = (props) => (
     <div className="card shadow" style={{width: "18rem"}}>
       <div className="card-header bg-primary text-white position-relative">
         {props.spk.spkTypeName}
-        <span class="badge rounded-pill text-bg-light position-absolute end-0 me-2">{props.spk.cpv}cp</span> 
+        <span className="badge rounded-pill text-bg-light position-absolute end-0 me-2">{props.spk.cpv}cp</span> 
       </div> 
       <div className="card-body">
         <h6 className="card-subtitle mb-2 text-body-secondary">{props.spk.spkId}</h6>
@@ -23,7 +23,7 @@ const Subject = (props) => (
     <div className="card shadow" style={{width: "18rem"}}>
       <div className="card-header bg-success text-white">
         {props.subject.spkTypeName}
-        <span class="badge rounded-pill text-bg-light position-absolute end-0 me-2">{props.subject.cpv}cp</span> 
+        <span className="badge rounded-pill text-bg-light position-absolute end-0 me-2">{props.subject.cpv}cp</span> 
       </div>
       <div className="card-body">
         <h6 className="card-subtitle mb-2 text-body-secondary">{props.subject.subjectId}</h6>

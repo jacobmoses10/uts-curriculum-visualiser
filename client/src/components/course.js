@@ -5,21 +5,20 @@ import Visualiser from "./visualiser";
 
 export default function Course() {
   
-  const [course, setCourse] = useState([]);
+  const [course, setCourse] = useState({});
+  const [tree, setTree] = useState({});
   const params = useParams();
 
   useEffect(() => {
     async function getCourse() {
-      const response = await fetch(`http://localhost:4000/course/${params.id.toString()}`);
+      const courseResponse = await fetch(`http://localhost:4000/course/${params.id.toString()}`);
+      const treeResponse = await fetch(`http://localhost:4000/course/tree/${params.id.toString()}`);
 
-      if (!response.ok) {
-        const message = `An error occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-
-      const course = await response.json();
+      const course = await courseResponse.json();
+      const tree = await treeResponse.json();
+      
       setCourse(course);
+      setTree(tree);
     }
     getCourse();
     return;
@@ -29,6 +28,7 @@ export default function Course() {
   return(
     <div>
       <h1>{course.courseId} {course.fullTitle}</h1>
+      
       <dl className="row">
         <dt className="col-sm-3">Version</dt>
         <dd className="col-sm-9">v{course.coursev}</dd>
@@ -50,10 +50,11 @@ export default function Course() {
         <dd className="col-sm-9">{course.stage}</dd> 
       </dl>
 
-      <Visualiser data = {course}/>
+      <Visualiser data = {tree}/>
 
       <Cards data = {course}/>
 
     </div>
   );
 }
+

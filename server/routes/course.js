@@ -75,8 +75,7 @@ router.get("/tree/:courseId", async (req, res) => {
       });
     }
 
-    res.send(tree).status(200);
-    console.log(tree);   
+    res.send(tree).status(200);   
   } else {
     res.send("Course not found").status(404);
   }  

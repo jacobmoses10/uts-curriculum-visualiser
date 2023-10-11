@@ -1,46 +1,13 @@
-import React, { useEffect, useState } from "react";
 import { AnimatedTree } from 'react-tree-graph';
 import 'react-tree-graph/dist/style.css'
 
 export default function Visualiser(data) {
-
-  const [tree, setTree] = useState([]);
-
-  useEffect(() => {
-    async function getTree() {
-      const treeData = {
-        name: data.data.abbTitle,
-        children: []
-      };
-
-      if (data.data.spks) {
-        data.data.spks.forEach(spk => {
-          treeData.children.push({
-            name: spk.abbTitle,
-            id: spk.spkId
-          })
-        });
-      }
-      
-      if (data.data.subjects) {
-        data.data.subjects.forEach(subject => {
-          treeData.children.push({
-            name: subject.abbTitle,
-            id: subject.subjectId
-          })
-        });
-      }
-      
-      setTree(treeData);
-    }
-    getTree();
-    return;
-  }, [data]);
+  const tree = data.data;
 
   return (
     <div>
       <h4>Visualiser</h4>
-      <AnimatedTree data={tree} height={400} width={400}/>
+      <AnimatedTree data={tree} height={400} width={800}/>
     </div>
   );
 }
