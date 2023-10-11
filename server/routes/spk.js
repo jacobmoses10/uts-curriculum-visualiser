@@ -1,5 +1,6 @@
 import express from "express";
 import db from "../conn.js";
+import { getSpk } from "../lib.js";
 
 const router = express.Router();
 
@@ -12,46 +13,11 @@ router.get("/", async (req, res) => {
 
 // Get SPK by ID
 router.get("/:spkId", async (req, res) => {
-  let spkDb = await db.collection("SPKs");
-  let query = {spkId: req.params.spkId};
-  let result = await spkDb.findOne(query);
-
-  if (!result) {
-    res.send("SPK not found").status(404);
-  } else {
-    
-    // Find and add Spks to SPK
-    let spkSpkDb = await db.collection("SPK-SPK");
-    let spkSpkResult = await spkSpkDb.find(query).toArray();
-    
-    if (spkSpkResult.length) {
-      let spkIdArray = [];
-      spkSpkResult.forEach((spkSpk) => {
-        spkIdArray.push(spkSpk.spkId2);
-      });
-
-      let spkQuery = {spkId: {$in: spkIdArray}};
-      let spkResult = await spkDb.find(spkQuery).toArray();
-      result.spks = spkResult;
-    }
-    
-    // Find and add Subjects to SPK
-    let spkSubjectDb = await db.collection("SPK-Subject");
-    let spkSubjectResult = await spkSubjectDb.find(query).toArray();
-
-    if (spkSubjectResult.length) {
-      let subjectIdArray = [];
-      spkSubjectResult.forEach((spkSubject) => {
-        subjectIdArray.push(spkSubject.subjectId);
-      });
-      
-      let subjectDb = await db.collection("Subjects");
-      let subjectQuery = {subjectId: {$in: subjectIdArray}};
-      let subjectResult = await subjectDb.find(subjectQuery).toArray();
-      result.subjects = subjectResult;
-    }
-
+  const result = await getSpk(req.params.spkId);
+  if (result) {
     res.send(result).status(200);
+  } else {
+    res.send("SPK not found").status(404);
   }
 });
 

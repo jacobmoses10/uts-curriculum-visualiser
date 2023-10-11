@@ -16,7 +16,8 @@ export default function Visualiser(data) {
       if (data.data.spks) {
         data.data.spks.forEach(spk => {
           treeData.children.push({
-            name: spk.abbTitle
+            name: spk.abbTitle,
+            id: spk.spkId
           })
         });
       }
@@ -24,7 +25,8 @@ export default function Visualiser(data) {
       if (data.data.subjects) {
         data.data.subjects.forEach(subject => {
           treeData.children.push({
-            name: subject.abbTitle
+            name: subject.abbTitle,
+            id: subject.subjectId
           })
         });
       }
