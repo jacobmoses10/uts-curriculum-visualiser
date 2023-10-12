@@ -14,7 +14,7 @@ const App = () => {
       <header>
         <Navbar />
       </header>
-      <main role="main" class="container mt-3" style={{"minHeight": 700}}>
+      <main role="main" className="mt-3" style={{"minHeight": 700}}>
         <Routes>
           <Route exact path="/" element={<Search />} />
           <Route path="/course/:id" element={<Course />} />

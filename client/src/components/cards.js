@@ -43,7 +43,7 @@ export default function Cards(data) {
         return (<Spk spk={spk} key={spk.spkId}/>);
       });
       return (
-        <div className="container gy-5">
+        <div className="container gy-3">
           <h4>SPKs</h4>
           <div className="row gy-5 justify-content-start">
             {spkMap}
@@ -59,7 +59,7 @@ export default function Cards(data) {
         return (<Subject subject={subject} key={subject.subjectId}/>);
       });
       return (
-        <div className="container gy-5">
+        <div className="container gy-3">
           <h4>Subjects</h4>
           <div className="row gy-5 justify-content-start">
             {subjectMap}
@@ -75,7 +75,7 @@ export default function Cards(data) {
         return (<Subject subject={subject} key={subject.subjectId}/>);
       });
       return (
-        <div className="container gy-5">
+        <div className="container gy-3">
           <h4>Prerequisites For This Subject</h4>
           <div className="row gy-5 justify-content-start">
             {prereqMap}
@@ -91,7 +91,7 @@ export default function Cards(data) {
         return (<Subject subject={subject} key={subject.subjectId}/>);
       });
       return (
-        <div className="container gy-5">
+        <div className="container gy-3">
           <h4>This Subject Is A Prequisite To</h4>
           <div className="row gy-5 justify-content-start">
             {postreqMap}

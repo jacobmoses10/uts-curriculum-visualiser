@@ -41,7 +41,7 @@ export default function CourseList() {
   }
 
   return (
-    <div>
+    <div className="container">
       <form className="input-group mb-3" role="search">
           <input className="form-control" type="search" placeholder="Search" aria-label="Search"/>
           <button className="btn btn-outline-success" type="submit">Search</button>

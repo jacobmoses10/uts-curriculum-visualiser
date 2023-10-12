@@ -24,27 +24,44 @@ export default function Spk() {
     return;
   }, [params.id]);
 
+  function getFoe() {
+    if (spk.primaryFoeName) {
+      return (
+        <div>
+          <dt className="sm-2">Field of Education</dt>
+          <dd className="sm-9">{spk.primaryFoeName}</dd>
+        </div>
+      );
+    }
+  }
 
   return(
-    <div>
-      <h1>{spk.spkId} {spk.fullTitle}</h1>
-      <dl className="row">
-        <dt className="col-sm-2">Version</dt>
-        <dd className="col-sm-9">v{spk.spkv}</dd>
-        <dt className="col-sm-2">Type</dt>
-        <dd className="col-sm-9">{spk.spkTypeId}: {spk.spkTypeName}</dd>
-        <dt className="col-sm-2">Credit Points</dt>
-        <dd className="col-sm-9">{spk.cpv}</dd>
-        <dt className="col-sm-2">Faculty</dt>
-        <dd className="col-sm-9">{spk.orgName}</dd>
-        <dt className="col-sm-2">Field of Education</dt>
-        <dd className="col-sm-9">{spk.primaryFoeName}</dd>
-        <dt className="col-sm-2">Study Area</dt>
-        <dd className="col-sm-9">{spk.studyAreaId}: {spk.studyAreaName}</dd>
-        <dt className="col-sm-2">Stage</dt>
-        <dd className="col-sm-9">{spk.stage}</dd> 
-      </dl>
+    <div className="container">
+      <h2>{spk.spkId} {spk.fullTitle}</h2>
+      <hr/>
 
+      <div className="row">
+        <dl className="col">
+          <dt className="sm-2">SPK Version</dt>
+          <dd className="sm-9">v{spk.spkv}</dd>
+          <dt className="sm-2">SPK Type</dt>
+          <dd className="sm-9">{spk.spkTypeId}: {spk.spkTypeName}</dd>
+          <dt className="sm-2">Credit Points</dt>
+          <dd className="sm-9">{spk.cpv}</dd>
+          {getFoe()}  
+        </dl>
+
+        <dl className="col">
+          <dt className="sm-2">Faculty</dt>
+          <dd className="sm-9">{spk.orgName}</dd>
+          <dt className="sm-2">Study Area</dt>
+          <dd className="sm-9">{spk.studyAreaId}: {spk.studyAreaName}</dd>
+          <dt className="sm-2">Stage</dt>
+          <dd className="sm-9">{spk.stage}</dd>
+        </dl>
+      </div>
+
+      <hr/>
       <Cards data = {spk}/>
     
     </div>
