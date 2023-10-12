@@ -6,19 +6,23 @@ import Search from "./components/search.js";
 import Course from "./components/course.js";
 import Spk from "./components/spk.js";
 import Subject from "./components/subject.js";
+import Footer from "./components/footer";
 
 const App = () => {
   return(
     <div>
-      <Navbar />
-      <div style={{ margin: 20 }}>
-      <Routes>
-        <Route exact path="/" element={<Search />} />
-        <Route path="/course/:id" element={<Course />} />
-        <Route path="/spk/:id" element={<Spk />} />
-        <Route path="/subject/:id" element={<Subject />} />
-      </Routes>
-      </div>
+      <header>
+        <Navbar />
+      </header>
+      <main role="main" class="container mt-3" style={{"minHeight": 700}}>
+        <Routes>
+          <Route exact path="/" element={<Search />} />
+          <Route path="/course/:id" element={<Course />} />
+          <Route path="/spk/:id" element={<Spk />} />
+          <Route path="/subject/:id" element={<Subject />} />
+        </Routes>
+      </main>
+      <Footer />
     </div>
   );
 };

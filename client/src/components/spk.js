@@ -29,19 +29,19 @@ export default function Spk() {
     <div>
       <h1>{spk.spkId} {spk.fullTitle}</h1>
       <dl className="row">
-        <dt className="col-sm-3">Version</dt>
+        <dt className="col-sm-2">Version</dt>
         <dd className="col-sm-9">v{spk.spkv}</dd>
-        <dt className="col-sm-3">Type</dt>
+        <dt className="col-sm-2">Type</dt>
         <dd className="col-sm-9">{spk.spkTypeId}: {spk.spkTypeName}</dd>
-        <dt className="col-sm-3">Credit Points</dt>
+        <dt className="col-sm-2">Credit Points</dt>
         <dd className="col-sm-9">{spk.cpv}</dd>
-        <dt className="col-sm-3">Faculty</dt>
+        <dt className="col-sm-2">Faculty</dt>
         <dd className="col-sm-9">{spk.orgName}</dd>
-        <dt className="col-sm-3">Field of Education</dt>
+        <dt className="col-sm-2">Field of Education</dt>
         <dd className="col-sm-9">{spk.primaryFoeName}</dd>
-        <dt className="col-sm-3">Study Area</dt>
+        <dt className="col-sm-2">Study Area</dt>
         <dd className="col-sm-9">{spk.studyAreaId}: {spk.studyAreaName}</dd>
-        <dt className="col-sm-3">Stage</dt>
+        <dt className="col-sm-2">Stage</dt>
         <dd className="col-sm-9">{spk.stage}</dd> 
       </dl>
 

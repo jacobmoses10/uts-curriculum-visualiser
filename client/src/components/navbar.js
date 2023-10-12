@@ -5,7 +5,7 @@ import logo from "../img/uts-logo-white.png"
 
 export default function NavBar() {
   return(
-      <nav className="navbar bg-primary" data-bs-theme="dark">
+      <nav className="navbar navbar-expand-md bg-primary" data-bs-theme="dark">
         <NavLink className="navbar-brand" to="/">
           <img src={logo} width="110" alt="UTS"></img>
         </NavLink>
