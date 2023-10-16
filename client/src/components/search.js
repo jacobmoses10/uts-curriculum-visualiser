@@ -15,24 +15,19 @@ const Course = (props) => (
 
 export default function CourseList() {
   const [courses, setCourses] = useState([]);
+  const [key, setKey] = useState("");
 
   useEffect(() => {
+
     async function getCourses() {
-      const response = await fetch(`http://localhost:4000/course/`);
-
-      if (!response.ok) {
-        const message = `An error occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-
+      const response = await fetch(`http://localhost:4000/course?search=${key}`);
       const courses = await response.json();
       setCourses(courses);
     }
     
     getCourses();
     return;
-  }, [courses.length]);
+  }, [key]);
 
   function courseList() {
     return courses.map((course)=> {

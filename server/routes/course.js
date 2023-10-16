@@ -4,10 +4,37 @@ import { getCourse, getSpk } from "../lib.js";
 
 const router = express.Router();
 
-// Get all Courses
+// Get all/searched Courses
 router.get("/", async (req, res) => {
   let courses = await db.collection("Courses");
-  let results = await courses.find({}).toArray();
+  const { search } = req.query;
+  let results;
+  if (search) {
+    results = await courses.aggregate(
+      [
+        {
+          '$search': {
+            'index': 'search-courses', 
+            'autocomplete': {
+              'query': search,
+              'path': 'searchTitle',
+            }
+          }
+        }, {
+          '$limit': 5
+        }, {
+          '$project': {
+            'courseId': 1, 
+            'fullTitle': 1, 
+            'courseTypeName': 1, 
+            'orgName': 1,
+          }
+        }
+      ]
+    ).toArray();
+  } else {
+    results = await courses.find({}).toArray();
+  }  
   res.send(results).status(200);
 });
 
