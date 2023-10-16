@@ -31,20 +31,14 @@ export default function CourseList() {
 
   function courseList() {
     return courses.map((course)=> {
-      return (
-        <Course
-          course={course}
-          key={course.fullTitle}
-        />
-      );
+      return (<Course course={course} key={course.courseId}/>);
     });
   }
 
   return (
-    <div>
-      <form className="input-group mb-3">
-          <input className="form-control" placeholder="Search" aria-label="Search" value={key}
-            onChange={(e) => setKey(e.target.value)}/>
+    <div className="container">
+      <form className="input-group mb-3" role="search">
+          <input className="form-control" type="search" placeholder="Search" aria-label="Search"/>
           <button className="btn btn-outline-success" type="submit">Search</button>
       </form>
       <h3>Course List</h3>
