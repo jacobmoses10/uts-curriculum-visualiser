@@ -1,16 +1,14 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { NavLink } from "react-router-dom";
-import logo from "../img/uts-logo.png"
+import logo from "../img/uts-logo-white.png"
 
 export default function NavBar() {
   return(
-    <div className="container-fluid">
-      <nav className="navbar">
+      <nav className="navbar navbar-expand-md bg-primary" data-bs-theme="dark">
         <NavLink className="navbar-brand" to="/">
-          <img src={logo} width="250" alt="UTS"></img>
+          <img src={logo} width="110" alt="UTS"></img>
         </NavLink>
       </nav>
-    </div>
   );
 }

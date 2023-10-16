@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import Cards from "./cards";
 
 export default function Subject() {
   
@@ -21,36 +22,56 @@ export default function Subject() {
     }
     getSubject();
     return;
-  }, [subject, params.id]);
+  }, [params.id]);
 
+  function getFeeLevel() {
+    if (subject.feeLevelType && subject.feeLevelCode) {
+      return(
+        <div>
+          <dt className="sm-2">Fee Level</dt>
+          <dd className="sm-9">{subject.feeLevelType} ({subject.feeLevelCode})</dd>
+        </div>
+      );
+    }
+  }
 
   return(
-    <div>
-      <h1>{subject.subjectId} {subject.fullTitle}</h1>
-      <dl class="row">
-        <dt class="col-sm-3">Version</dt>
-        <dd class="col-sm-9">v{subject.subjectv}</dd>
-        <dt class="col-sm-3">Type</dt>
-        <dd class="col-sm-9">{subject.spkTypeId}: {subject.spkTypeName}</dd>
-        <dt class="col-sm-3">Credit Points</dt>
-        <dd class="col-sm-9">{subject.cpv}</dd>
-        <dt class="col-sm-3">Faculty</dt>
-        <dd class="col-sm-9">{subject.orgName}</dd>
-        <dt class="col-sm-3">Field of Education</dt>
-        <dd class="col-sm-9">{subject.primaryFoeName}</dd>
-        <dt class="col-sm-3">Study Area</dt>
-        <dd class="col-sm-9">{subject.studyAreaId}: {subject.studyAreaName}</dd>
-        <dt class="col-sm-3">Study Type</dt>
-        <dd class="col-sm-9">{subject.studyType}</dd>
-        <dt class="col-sm-3">Grading</dt>
-        <dd class="col-sm-9">{subject.grading}</dd>
-        <dt class="col-sm-3">Study Type</dt>
-        <dd class="col-sm-9">{subject.studyType}</dd>
-        <dt class="col-sm-3">Fee Level</dt>
-        <dd class="col-sm-9">{subject.feeLevelType} ({subject.feeLevelCode})</dd>
-        <dt class="col-sm-3">Stage</dt>
-        <dd class="col-sm-9">{subject.stage}</dd> 
-      </dl>
+    <div className="container">
+      <h2>{subject.subjectId} {subject.fullTitle}</h2>
+      <hr/>
+
+      <div className="row">
+        <dl className="col">
+          <dt className="sm-2">Version</dt>
+          <dd className="sm-9">v{subject.subjectv}</dd>
+          <dt className="sm-2">Type</dt>
+          <dd className="sm-9">{subject.spkTypeId}: {subject.spkTypeName}</dd>
+          <dt className="sm-2">Credit Points</dt>
+          <dd className="sm-9">{subject.cpv}</dd>
+          <dt className="sm-2">Faculty</dt>
+          <dd className="sm-9">{subject.orgName}</dd>
+          <dt className="sm-2">Field of Education</dt>
+          <dd className="sm-9">{subject.primaryFoeName}</dd>
+          <dt className="sm-2">Study Area</dt>
+          <dd className="sm-9">{subject.studyAreaId}: {subject.studyAreaName}</dd>
+        </dl>
+
+        <dl className="col">
+          <dt className="sm-2">Study Type</dt>
+          <dd className="sm-9">{subject.studyType}</dd>
+          <dt className="sm-2">Grading</dt>
+          <dd className="sm-9">{subject.grading}</dd>
+          <dt className="sm-2">Study Type</dt>
+          <dd className="sm-9">{subject.studyType}</dd>
+          {getFeeLevel()}
+          <dt className="sm-2">Stage</dt>
+          <dd className="sm-9">{subject.stage}</dd>
+        </dl>
+      </div>
+      
+      <hr/>
+      <Cards data = {subject}/>
+
     </div>
   );
 }
