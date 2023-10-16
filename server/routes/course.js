@@ -21,8 +21,6 @@ router.get("/", async (req, res) => {
             }
           }
         }, {
-          '$limit': 5
-        }, {
           '$project': {
             'courseId': 1, 
             'fullTitle': 1, 

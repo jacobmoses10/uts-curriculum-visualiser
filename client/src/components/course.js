@@ -5,19 +5,19 @@ import Cards from "./cards";
 export default function Course() {
   
   const [course, setCourse] = useState({});
-  const [tree, setTree] = useState({});
+  // const [tree, setTree] = useState({});
   const params = useParams();
 
   useEffect(() => {
     async function getCourse() {
       const courseResponse = await fetch(`http://localhost:4000/course/${params.id.toString()}`);
-      const treeResponse = await fetch(`http://localhost:4000/course/tree/${params.id.toString()}`);
+      // const treeResponse = await fetch(`http://localhost:4000/course/tree/${params.id.toString()}`);
 
       const course = await courseResponse.json();
-      const tree = await treeResponse.json();
+      // const tree = await treeResponse.json();
       
       setCourse(course);
-      setTree(tree);
+      // setTree(tree);
     }
     getCourse();
     return;

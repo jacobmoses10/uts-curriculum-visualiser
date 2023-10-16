@@ -13,36 +13,29 @@ const Course = (props) => (
   </tr>
 );
 
-export default function CourseList() {
+export default function Search() {
   const [courses, setCourses] = useState([]);
-  const [key, setKey] = useState("");
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
 
     async function getCourses() {
-      const response = await fetch(`http://localhost:4000/course?search=${key}`);
+      const response = await fetch(`http://localhost:4000/course?search=${search}`);
       const courses = await response.json();
       setCourses(courses);
     }
     
     getCourses();
-    return;
-  }, [key]);
-
-  function courseList() {
-    return courses.map((course)=> {
-      return (<Course course={course} key={course.courseId}/>);
-    });
-  }
+  }, [search]);
 
   return (
     <div className="container">
-      <form className="input-group mb-3" role="search">
-          <input className="form-control" type="search" placeholder="Search" aria-label="Search"/>
-          <button className="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <div className="input-group mb-3" role="search">
+        <input name="search" className="form-control" type="search" placeholder="Search" aria-label="Search"
+          onChange={({currentTarget: input}) => setSearch(input.value)}/>
+      </div>
       <h3>Course List</h3>
-      <table className="table table-striped" style={{ marginTop: 20 }}>
+      <table className="table table-hover" style={{ marginTop: 20 }}>
         <thead>
           <tr>
             <th>ID</th>
@@ -52,9 +45,12 @@ export default function CourseList() {
             <th></th>
           </tr>
         </thead>
-        <tbody>{courseList()}</tbody>
+        <tbody>
+          {courses.map((course) => (
+            <Course course={course} key={course._id}/>
+          ))}
+        </tbody>
       </table>
     </div>
   );
-
 }
