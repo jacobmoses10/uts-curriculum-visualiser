@@ -7,7 +7,8 @@ export default function Course() {
   const [course, setCourse] = useState({});
   // const [tree, setTree] = useState({});
   const params = useParams();
-
+  window.scrollTo(0, 0);
+  
   useEffect(() => {
     async function getCourse() {
       const courseResponse = await fetch(`http://localhost:4000/course/${params.id.toString()}`);

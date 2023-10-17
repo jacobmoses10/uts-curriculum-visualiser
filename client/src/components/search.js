@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+
 const Course = (props) => (
   <tr>
     <td>{props.course.courseId}</td>
@@ -16,6 +17,7 @@ const Course = (props) => (
 export default function Search() {
   const [courses, setCourses] = useState([]);
   const [search, setSearch] = useState("");
+  window.scrollTo(0, 0);
 
   useEffect(() => {
 
@@ -31,11 +33,10 @@ export default function Search() {
   return (
     <div className="container">
       <div className="input-group mb-3" role="search">
-        <input name="search" className="form-control" type="search" placeholder="Search" aria-label="Search"
-          onChange={({currentTarget: input}) => setSearch(input.value)}/>
+        <input name="search" className="form-control mx-1 my-3" type="search" placeholder="Search" 
+          aria-label="Search" onChange={({currentTarget: input}) => setSearch(input.value)}/>
       </div>
-      <h3>Course List</h3>
-      <table className="table table-hover" style={{ marginTop: 20 }}>
+      <table className="table table-hover border-top" style={{ marginTop: 20 }}>
         <thead>
           <tr>
             <th>ID</th>
