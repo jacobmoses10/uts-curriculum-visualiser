@@ -40,7 +40,7 @@ export default function Cards(data) {
   function spkCards() {
     if (data.data.spks) {
       const spkMap = data.data.spks.map((spk)=> {
-        return (<Spk spk={spk} key={spk.spkId}/>);
+        return (<Spk spk={spk} key={spk._id}/>);
       });
       return (
         <div className="container gy-3">
@@ -56,7 +56,7 @@ export default function Cards(data) {
   function subjectCards() {
     if (data.data.subjects) {
       const subjectMap = data.data.subjects.map((subject)=> {
-        return (<Subject subject={subject} key={subject.subjectId}/>);
+        return (<Subject subject={subject} key={subject._id}/>);
       });
       return (
         <div className="container gy-3">
@@ -72,7 +72,7 @@ export default function Cards(data) {
   function prereqCards() {
     if (data.data.prereqs) {
       const prereqMap = data.data.prereqs.map((subject)=> {
-        return (<Subject subject={subject} key={subject.subjectId}/>);
+        return (<Subject subject={subject} key={subject._id}/>);
       });
       return (
         <div className="container gy-3">
@@ -88,7 +88,7 @@ export default function Cards(data) {
   function postreqCards() {
     if (data.data.postreqs) {
       const postreqMap = data.data.postreqs.map((subject)=> {
-        return (<Subject subject={subject} key={subject.subjectId}/>);
+        return (<Subject subject={subject} key={subject._id}/>);
       });
       return (
         <div className="container gy-3">

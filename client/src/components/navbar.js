@@ -11,10 +11,10 @@ export default function NavBar() {
           <NavLink className="navbar-brand" to="/">
             <img src={logo} width="110" alt="UTS"></img>
           </NavLink>
-          <span class="navbar-text fs-3 fw-bold text-light">
-            Curriculum Visualiser
-          </span>
-          <a class="icon-link mx-3" href="/">
+          <a className="navbar-text fs-3 fw-bold text-light" style={{"textDecoration":"none"}} href="/">
+            2023 Curriculum
+          </a>
+          <a className="icon-link mx-3" href="/">
             <Search color="white" size={20}/>
           </a>
         </div>
