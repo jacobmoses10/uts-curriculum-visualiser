@@ -4,33 +4,46 @@ import { getCourse, getSpk } from "../lib.js";
 
 const router = express.Router();
 
-// Get all/searched Courses
+// Get Paginated Searched Courses
 router.get("/", async (req, res) => {
   let courses = await db.collection("Courses");
-  const { search } = req.query;
+  const search = req.query.search;
+  const page = parseInt(req.query.page);
+  const limit = parseInt(req.query.limit);
+  console.log(`>>>>> ${search} + ${page} + ${limit}`);
+
   let results;
   if (search) {
-    results = await courses.aggregate(
-      [
-        {
-          '$search': {
-            'index': 'search-courses', 
-            'autocomplete': {
-              'query': search,
-              'path': 'searchTitle',
-            }
-          }
-        }, {
-          '$project': {
-            'courseId': 1, 
-            'fullTitle': 1, 
-            'courseTypeName': 1, 
-            'orgName': 1,
+    let agg = [
+      {
+        '$search': {
+          'index': 'search-courses', 
+          'autocomplete': {
+            'query': search,
+            'path': 'searchTitle',
           }
         }
-      ]
-    ).toArray();
+      }, {
+        '$project': {
+          'courseId': 1, 
+          'fullTitle': 1, 
+          'courseTypeName': 1, 
+          'orgName': 1,
+        }
+      } 
+    ];
+    
+    if (page && limit) {
+      agg.push({
+        '$skip': page * limit
+      }, {
+        '$limit': limit
+      });
+    }
+
+    results = await courses.aggregate(agg).toArray();
   } else {
+    // Get all Courses
     results = await courses.find({}).toArray();
   }  
   res.send(results).status(200);
