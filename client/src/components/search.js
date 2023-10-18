@@ -17,26 +17,36 @@ const Course = (props) => (
 export default function Search() {
   const [courses, setCourses] = useState([]);
   const [search, setSearch] = useState("");
-  window.scrollTo(0, 0);
+  const [limit, setLimit] = useState(50);
 
   useEffect(() => {
 
     async function getCourses() {
-      const response = await fetch(`http://localhost:4000/course?search=${search}`);
+      const url = `http://localhost:4000/course?search=${search}&limit=${limit}`;
+      const response = await fetch(url);
       const courses = await response.json();
       setCourses(courses);
     }
     
     getCourses();
-  }, [search]);
+  }, [search, limit]);
+
+  const onChange = (input) => {
+    setSearch(input);
+    setLimit(50);
+  }
+  
+  const onClick = () => {
+		setLimit(limit + 50);
+	};
 
   return (
     <div className="container">
       <div className="input-group mb-3" role="search">
         <input name="search" className="form-control mx-1 my-3" type="search" placeholder="Search" 
-          aria-label="Search" onChange={({currentTarget: input}) => setSearch(input.value)}/>
+          aria-label="Search" onChange={({currentTarget: input}) => onChange(input.value)}/>
       </div>
-      <table className="table table-hover border-top" style={{ marginTop: 20 }}>
+      <table className="table table-hover border-top" style={{ marginTop: 50 }}>
         <thead>
           <tr>
             <th>ID</th>
@@ -52,6 +62,9 @@ export default function Search() {
           ))}
         </tbody>
       </table>
+      <div className="d-flex justify-content-center">
+        <button className="btn btn-primary" onClick={() => onClick()}>Load More</button>
+      </div>
     </div>
   );
 }

@@ -8,13 +8,11 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   let courses = await db.collection("Courses");
   const search = req.query.search;
-  const page = parseInt(req.query.page);
   const limit = parseInt(req.query.limit);
-  console.log(`>>>>> ${search} + ${page} + ${limit}`);
 
-  let results;
+  let agg = [];
   if (search) {
-    let agg = [
+    agg.push(
       {
         '$search': {
           'index': 'search-courses', 
@@ -31,21 +29,16 @@ router.get("/", async (req, res) => {
           'orgName': 1,
         }
       } 
-    ];
-    
-    if (page && limit) {
-      agg.push({
-        '$skip': page * limit
-      }, {
-        '$limit': limit
-      });
-    }
-
-    results = await courses.aggregate(agg).toArray();
-  } else {
-    // Get all Courses
-    results = await courses.find({}).toArray();
+    );
   }  
+  
+  if (limit) {
+    agg.push({
+      '$limit': limit
+    });
+  }
+
+  const results = await courses.aggregate(agg).toArray();
   res.send(results).status(200);
 });
 
