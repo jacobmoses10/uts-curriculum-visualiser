@@ -6,6 +6,7 @@ export default function Subject() {
   
   const [subject, setSubject] = useState([]);
   const params = useParams();
+  window.scrollTo(0, 0);
 
   useEffect(() => {
     async function getSubject() {
