@@ -73,8 +73,7 @@ router.get("/tree/:courseId", async (req, res) => {
           spkData.spks.forEach((childSpk) => {
             spkChildren.push({
               id: childSpk.spkId,
-              name: childSpk.abbTitle,
-              link: `/spk/${childSpk.spkId}`
+              name: childSpk.abbTitle
             });
           });
         }
@@ -84,8 +83,7 @@ router.get("/tree/:courseId", async (req, res) => {
           spkData.subjects.forEach((childSubject) => {
             spkChildren.push({
               id: childSubject.subjectId,
-              name: childSubject.abbTitle,
-              link: `/subject/${childSubject.subjectId}`
+              name: childSubject.abbTitle
             });
           });
         }
@@ -93,7 +91,6 @@ router.get("/tree/:courseId", async (req, res) => {
         tree.children.push({
           id: spkData.spkId,
           name: spkData.abbTitle,
-          link: `/spk/${spkData.spkId}`,
           children: spkChildren
         });
       }
@@ -104,8 +101,7 @@ router.get("/tree/:courseId", async (req, res) => {
       result.subjects.forEach((subject) => {
         tree.children.push({
           id: subject.subjectId,
-          name: subject.abbTitle,
-          link: `/subject/${subject.subjectId}`
+          name: subject.abbTitle
         });
       });
     }
