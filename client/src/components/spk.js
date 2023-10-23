@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import Cards from "./cards";
 
 export default function Spk() {
   
   const [spk, setSpk] = useState([]);
   const params = useParams();
+  window.scrollTo(0, 0);
 
   useEffect(() => {
     async function getSpk() {
@@ -21,28 +23,48 @@ export default function Spk() {
     }
     getSpk();
     return;
-  }, [spk, params.id]);
+  }, [params.id]);
 
+  function getFoe() {
+    if (spk.primaryFoeName) {
+      return (
+        <div>
+          <dt className="sm-2">Field of Education</dt>
+          <dd className="sm-9">{spk.primaryFoeName}</dd>
+        </div>
+      );
+    }
+  }
 
   return(
-    <div>
-      <h1>{spk.spkId} {spk.fullTitle}</h1>
-      <dl class="row">
-        <dt class="col-sm-3">Version</dt>
-        <dd class="col-sm-9">v{spk.spkv}</dd>
-        <dt class="col-sm-3">Type</dt>
-        <dd class="col-sm-9">{spk.spkTypeId}: {spk.spkTypeName}</dd>
-        <dt class="col-sm-3">Credit Points</dt>
-        <dd class="col-sm-9">{spk.cpv}</dd>
-        <dt class="col-sm-3">Faculty</dt>
-        <dd class="col-sm-9">{spk.orgName}</dd>
-        <dt class="col-sm-3">Field of Education</dt>
-        <dd class="col-sm-9">{spk.primaryFoeName}</dd>
-        <dt class="col-sm-3">Study Area</dt>
-        <dd class="col-sm-9">{spk.studyAreaId}: {spk.studyAreaName}</dd>
-        <dt class="col-sm-3">Stage</dt>
-        <dd class="col-sm-9">{spk.stage}</dd> 
-      </dl>
+    <div className="container">
+      <h2>{spk.spkId} {spk.fullTitle}</h2>
+      <hr/>
+
+      <div className="row">
+        <dl className="col">
+          <dt className="sm-2">SPK Version</dt>
+          <dd className="sm-9">v{spk.spkv}</dd>
+          <dt className="sm-2">SPK Type</dt>
+          <dd className="sm-9">{spk.spkTypeId}: {spk.spkTypeName}</dd>
+          <dt className="sm-2">Credit Points</dt>
+          <dd className="sm-9">{spk.cpv}</dd>
+          {getFoe()}  
+        </dl>
+
+        <dl className="col">
+          <dt className="sm-2">Faculty</dt>
+          <dd className="sm-9">{spk.orgName}</dd>
+          <dt className="sm-2">Study Area</dt>
+          <dd className="sm-9">{spk.studyAreaId}: {spk.studyAreaName}</dd>
+          <dt className="sm-2">Stage</dt>
+          <dd className="sm-9">{spk.stage}</dd>
+        </dl>
+      </div>
+
+      <hr/>
+      <Cards data = {spk}/>
+    
     </div>
   );
 }

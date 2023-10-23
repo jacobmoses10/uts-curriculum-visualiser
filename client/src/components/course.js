@@ -1,53 +1,85 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import Cards from "./cards";
 
 export default function Course() {
   
-  const [course, setCourse] = useState([]);
+  const [course, setCourse] = useState({});
   const params = useParams();
-
+  window.scrollTo(0, 0);
+  
   useEffect(() => {
     async function getCourse() {
-      const response = await fetch(`http://localhost:4000/course/${params.id.toString()}`);
-
-      if (!response.ok) {
-        const message = `An error occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-
-      const course = await response.json();
+      const courseResponse = await fetch(`http://localhost:4000/course/${params.id.toString()}`);
+      const course = await courseResponse.json();      
       setCourse(course);
     }
     getCourse();
     return;
-  }, [course, params.id]);
+  }, [params.id]);
 
+  function getFoe() {
+    if (course.primaryFoeName) {
+      return(
+        <div>
+          <dt className="sm-2">Field of Education</dt>
+          <dd className="sm-9">{course.primaryFoeName} {course.secondaryFoeName}</dd>
+        </div>
+      );
+    }
+  }
+
+  function getDuration() {
+    if (course.expectedTime === "1") {
+      return(<dd className="sm-9">{course.expectedTime} Year</dd>);
+    } else {
+      return(<dd className="sm-9">{course.expectedTime} Years</dd>);
+    }
+  }
+
+  function getAwardLevel() {
+    if (course.awardLevelType) {
+      return(
+        <div>
+          <dt className="sm-2">Award Level</dt>
+          <dd className="sm-9">{course.awardLevelType}</dd>
+        </div>
+      );
+    }
+  }
 
   return(
-    <div>
-      <h1>{course.courseId} {course.fullTitle}</h1>
-      <dl class="row">
-        <dt class="col-sm-3">Version</dt>
-        <dd class="col-sm-9">v{course.coursev}</dd>
-        <dt class="col-sm-3">Type</dt>
-        <dd class="col-sm-9">{course.courseTypeId}: {course.courseTypeName}</dd>
-        <dt class="col-sm-3">Faculty</dt>
-        <dd class="col-sm-9">{course.orgName}</dd>
-        <dt class="col-sm-3">Field of Education</dt>
-        <dd class="col-sm-9">{course.primaryFoeName} {course.secondaryFoeName}</dd>
-        <dt class="col-sm-3">Time to Complete</dt>
-        <dd class="col-sm-9">{course.expectedTime} Years</dd>
-        <dt class="col-sm-3">Award Level</dt>
-        <dd class="col-sm-9">{course.awardLevelType}</dd>
-        <dt class="col-sm-3">Study Type</dt>
-        <dd class="col-sm-9">{course.studyType}</dd>
-        <dt class="col-sm-3">Study Area</dt>
-        <dd class="col-sm-9">{course.studyAreaId}: {course.studyAreaName}</dd>
-        <dt class="col-sm-3">Stage</dt>
-        <dd class="col-sm-9">{course.stage}</dd>
-        
+    <div className="container">
+      <h2>{course.courseId} {course.fullTitle}</h2>
+      <hr/>
+
+      <div className="row">
+      <dl className="col">
+        <dt className="sm-2">Course Version</dt>
+        <dd className="sm-9">v{course.coursev}</dd>
+        <dt className="sm-2">Type</dt>
+        <dd className="sm-9">{course.courseTypeId}: {course.courseTypeName}</dd>
+        <dt className="sm-2">Faculty</dt>
+        <dd className="sm-9">{course.orgName}</dd>
+        {getFoe()}
+        <dt className="sm-2">Course Duration</dt>
+        {getDuration()}
       </dl>
+
+      <dl className="col">
+        {getAwardLevel()}
+        <dt className="sm-2">Study Type</dt>
+        <dd className="sm-9">{course.studyType}</dd>
+        <dt className="sm-2">Study Area</dt>
+        <dd className="sm-9">{course.studyAreaId}: {course.studyAreaName}</dd>
+        <dt className="sm-2">Stage</dt>
+        <dd className="sm-9">{course.stage}</dd>
+      </dl>
+      </div>
+      <hr/>
+
+      <Cards data = {course}/>
     </div>
   );
 }
+

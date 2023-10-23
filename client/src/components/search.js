@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+
 const Course = (props) => (
   <tr>
     <td>{props.course.courseId}</td>
@@ -13,46 +14,39 @@ const Course = (props) => (
   </tr>
 );
 
-export default function CourseList() {
+export default function Search() {
   const [courses, setCourses] = useState([]);
+  const [search, setSearch] = useState("");
+  const [limit, setLimit] = useState(50);
 
   useEffect(() => {
+
     async function getCourses() {
-      const response = await fetch(`http://localhost:4000/course/`);
-
-      if (!response.ok) {
-        const message = `An error occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-
+      const url = `http://localhost:4000/course?search=${search}&limit=${limit}`;
+      const response = await fetch(url);
       const courses = await response.json();
       setCourses(courses);
     }
     
     getCourses();
-    return;
-  }, [courses.length]);
+  }, [search, limit]);
 
-  function courseList() {
-    return courses.map((course)=> {
-      return (
-        <Course
-          course={course}
-          key={course.courseId}
-        />
-      );
-    });
+  const onChange = (input) => {
+    setSearch(input);
+    setLimit(50);
   }
+  
+  const onClick = () => {
+		setLimit(limit + 50);
+	};
 
   return (
-    <div>
-      <form className="input-group mb-3" role="search">
-          <input className="form-control" type="search" placeholder="Search" aria-label="Search"/>
-          <button className="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      <h3>Course List</h3>
-      <table className="table table-striped" style={{ marginTop: 20 }}>
+    <div className="container">
+      <div className="input-group mb-3" role="search">
+        <input name="search" className="form-control mx-1 my-3" type="search" placeholder="Search" 
+          aria-label="Search" onChange={({currentTarget: input}) => onChange(input.value)}/>
+      </div>
+      <table className="table table-hover border-top" style={{ marginTop: 50 }}>
         <thead>
           <tr>
             <th>ID</th>
@@ -62,9 +56,15 @@ export default function CourseList() {
             <th></th>
           </tr>
         </thead>
-        <tbody>{courseList()}</tbody>
+        <tbody>
+          {courses.map((course) => (
+            <Course course={course} key={course._id}/>
+          ))}
+        </tbody>
       </table>
+      <div className="d-flex justify-content-center">
+        <button className="btn btn-primary" onClick={() => onClick()}>Load More</button>
+      </div>
     </div>
   );
-
 }

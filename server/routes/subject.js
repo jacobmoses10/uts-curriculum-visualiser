@@ -1,5 +1,6 @@
 import express from "express";
 import db from "../conn.js";
+import { getSubject } from "../lib.js";
 
 const router = express.Router();
 
@@ -12,26 +13,12 @@ router.get("/", async (req, res) => {
 
 // Get Subject by ID
 router.get("/:subjectId", async (req, res) => {
-  let subjects = await db.collection("Subjects");
-  let query = {subjectId: req.params.subjectId};
-  let result = await subjects.findOne(query);
+  let result = await getSubject(req.params.subjectId);
 
-  if (!result) {
-    res.send("Subject not found").status(404);
-  } else {
-    
-    // Find and add Prerequisites to Subject
-    let prereqs = await db.collection("Prerequisites");
-    let prereqObject = await prereqs.find(query).toArray();
-    if (prereqObject.length) {
-      let prereqIds = [];
-      prereqObject.forEach((prereq) => {
-        prereqIds.push(prereq.subjectId2);
-      });
-      result.prereqIds = prereqIds;
-    }
-    
+  if (result) {
     res.send(result).status(200);
+  } else {
+    res.send("Subject not found").status(404);    
   }
 });
 
