@@ -4,37 +4,41 @@ import { getCourse, getSpk } from "../lib.js";
 
 const router = express.Router();
 
-// Get all/searched Courses
+// Get Paginated Searched Courses
 router.get("/", async (req, res) => {
   let courses = await db.collection("Courses");
-  const { search } = req.query;
-  let results;
+  const search = req.query.search;
+  const limit = parseInt(req.query.limit);
+
+  let agg = [];
   if (search) {
-    results = await courses.aggregate(
-      [
-        {
-          '$search': {
-            'index': 'search-courses', 
-            'autocomplete': {
-              'query': search,
-              'path': 'searchTitle',
-            }
-          }
-        }, {
-          '$limit': 5
-        }, {
-          '$project': {
-            'courseId': 1, 
-            'fullTitle': 1, 
-            'courseTypeName': 1, 
-            'orgName': 1,
+    agg.push(
+      {
+        '$search': {
+          'index': 'search-courses', 
+          'autocomplete': {
+            'query': search,
+            'path': 'searchTitle',
           }
         }
-      ]
-    ).toArray();
-  } else {
-    results = await courses.find({}).toArray();
+      }, {
+        '$project': {
+          'courseId': 1, 
+          'fullTitle': 1, 
+          'courseTypeName': 1, 
+          'orgName': 1,
+        }
+      } 
+    );
   }  
+  
+  if (limit) {
+    agg.push({
+      '$limit': limit
+    });
+  }
+
+  const results = await courses.aggregate(agg).toArray();
   res.send(results).status(200);
 });
 
@@ -69,8 +73,7 @@ router.get("/tree/:courseId", async (req, res) => {
           spkData.spks.forEach((childSpk) => {
             spkChildren.push({
               id: childSpk.spkId,
-              name: childSpk.abbTitle,
-              link: `/spk/${childSpk.spkId}`
+              name: childSpk.abbTitle
             });
           });
         }
@@ -80,8 +83,7 @@ router.get("/tree/:courseId", async (req, res) => {
           spkData.subjects.forEach((childSubject) => {
             spkChildren.push({
               id: childSubject.subjectId,
-              name: childSubject.abbTitle,
-              link: `/subject/${childSubject.subjectId}`
+              name: childSubject.abbTitle
             });
           });
         }
@@ -89,7 +91,6 @@ router.get("/tree/:courseId", async (req, res) => {
         tree.children.push({
           id: spkData.spkId,
           name: spkData.abbTitle,
-          link: `/spk/${spkData.spkId}`,
           children: spkChildren
         });
       }
@@ -100,8 +101,7 @@ router.get("/tree/:courseId", async (req, res) => {
       result.subjects.forEach((subject) => {
         tree.children.push({
           id: subject.subjectId,
-          name: subject.abbTitle,
-          link: `/subject/${subject.subjectId}`
+          name: subject.abbTitle
         });
       });
     }
