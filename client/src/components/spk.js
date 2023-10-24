@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Cards from "./cards";
+import Visualiser from "./visualiser";
 
 export default function Spk() {
   
   const [spk, setSpk] = useState([]);
+  const [tree, setTree] = useState({});
   const params = useParams();
   window.scrollTo(0, 0);
 
   useEffect(() => {
     async function getSpk() {
-      const response = await fetch(`http://localhost:4000/spk/${params.id.toString()}`);
-
-      if (!response.ok) {
-        const message = `An error occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-
-      const spk = await response.json();
+      const spkResponse = await fetch(`http://localhost:4000/spk/${params.id.toString()}`);
+      const spk = await spkResponse.json();
       setSpk(spk);
+
+      const treeResponse = await fetch(`http://localhost:4000/spk/tree/${params.id.toString()}`);
+      const tree = await treeResponse.json();
+      setTree(tree);
     }
     getSpk();
     return;
@@ -61,7 +60,10 @@ export default function Spk() {
           <dd className="sm-9">{spk.stage}</dd>
         </dl>
       </div>
-
+      <hr/>
+      <div className="d-flex justify-content-center">
+        <Visualiser data = {tree}/>
+      </div>
       <hr/>
       <Cards data = {spk}/>
     

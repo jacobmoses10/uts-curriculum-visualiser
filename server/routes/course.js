@@ -57,8 +57,8 @@ router.get("/tree/:courseId", async (req, res) => {
   const result = await getCourse(req.params.courseId);
   if (result) {
     let tree = {
-      id: result.courseId,
-      name: result.abbTitle,
+      name: result.courseId,
+      type: 'course',
       children: []
     };
 
@@ -72,8 +72,8 @@ router.get("/tree/:courseId", async (req, res) => {
         if (spkData.spks) {
           spkData.spks.forEach((childSpk) => {
             spkChildren.push({
-              id: childSpk.spkId,
-              name: childSpk.abbTitle
+              name: childSpk.spkId,
+              type: 'spk'
             });
           });
         }
@@ -82,15 +82,15 @@ router.get("/tree/:courseId", async (req, res) => {
         if (spkData.subjects) {
           spkData.subjects.forEach((childSubject) => {
             spkChildren.push({
-              id: childSubject.subjectId,
-              name: childSubject.abbTitle
+              name: childSubject.subjectId,
+              type: 'subject'
             });
           });
         }
         
         tree.children.push({
-          id: spkData.spkId,
-          name: spkData.abbTitle,
+          name: spkData.spkId,
+          type: 'spk',
           children: spkChildren
         });
       }
@@ -100,8 +100,8 @@ router.get("/tree/:courseId", async (req, res) => {
     if (result.subjects) {
       result.subjects.forEach((subject) => {
         tree.children.push({
-          id: subject.subjectId,
-          name: subject.abbTitle
+          name: subject.subjectId,
+          type: 'subject'
         });
       });
     }
