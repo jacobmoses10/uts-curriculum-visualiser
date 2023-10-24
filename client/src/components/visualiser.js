@@ -132,6 +132,7 @@ export default function Visualiser(data) {
     let childrenCount = 0;
     const defaultHeight = 500;
     if (data.data.children) {
+      childrenCount += data.data.children.length / 2;
       data.data.children.forEach(child => {
         if (child.children) {
           childrenCount += child.children.length;
