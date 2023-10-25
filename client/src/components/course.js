@@ -9,11 +9,11 @@ export default function Course() {
   const [tree, setTree] = useState({});
   const params = useParams();
   window.scrollTo(0, 0);
-  
+  // 
   useEffect(() => {
     async function getCourse() {
-      const courseResponse = await fetch(`http://localhost:4000/course/${params.id.toString()}`);
-      const treeResponse = await fetch(`http://localhost:4000/course/tree/${params.id.toString()}`);
+      const courseResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/course/${params.id.toString()}`);
+      const treeResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/course/tree/${params.id.toString()}`);
       const course = await courseResponse.json();   
       const tree = await treeResponse.json();   
       setCourse(course);
