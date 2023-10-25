@@ -21,7 +21,7 @@ export default function Search() {
   useEffect(() => {
 
     async function getCourses() {
-      const url = `http://localhost:4000/course?search=${search}&limit=${limit}`;
+      const url = `${process.env.REACT_APP_BASE_URL}/course?search=${search}&limit=${limit}`;
       const response = await fetch(url);
       const courses = await response.json();
       setCourses(courses);

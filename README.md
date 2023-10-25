@@ -1,5 +1,8 @@
 # UTS Curriculum Visualiser
 A curriculum visualiser built for UTS Engineering Capstone.
+
+Try it here -> [UTS Curriculum Visualiser](https://utscv.onrender.com/)
+
 ## How to Run Locally
 Create a `.env` file in the root folder and add MongoDB Atlas URI and Server Port.
 ```
