@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Cards from "./cards";
+import Visualiser from "./visualiser";
 
 export default function Course() {
   
   const [course, setCourse] = useState({});
+  const [tree, setTree] = useState({});
   const params = useParams();
   window.scrollTo(0, 0);
   
   useEffect(() => {
     async function getCourse() {
       const courseResponse = await fetch(`http://localhost:4000/course/${params.id.toString()}`);
-      const course = await courseResponse.json();      
+      const treeResponse = await fetch(`http://localhost:4000/course/tree/${params.id.toString()}`);
+      const course = await courseResponse.json();   
+      const tree = await treeResponse.json();   
       setCourse(course);
+      setTree(tree);
     }
     getCourse();
     return;
@@ -77,7 +82,10 @@ export default function Course() {
       </dl>
       </div>
       <hr/>
-
+      <div className="d-flex justify-content-center">
+        <Visualiser data = {tree}/>
+      </div>
+      <hr/>
       <Cards data = {course}/>
     </div>
   );
