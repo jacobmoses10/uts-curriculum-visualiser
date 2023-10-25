@@ -9,7 +9,7 @@ export default function Course() {
   const [tree, setTree] = useState({});
   const params = useParams();
   window.scrollTo(0, 0);
-  // 
+  
   useEffect(() => {
     async function getCourse() {
       const courseResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/course/${params.id.toString()}`);
