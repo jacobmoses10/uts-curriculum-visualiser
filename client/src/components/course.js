@@ -2,6 +2,7 @@ import React, { useState, useEffect} from "react";
 import { useParams } from "react-router";
 import Cards from "./cards";
 import Visualiser from "./visualiser";
+import Loading from "./loading";
 
 export default function Course() {
   
@@ -83,7 +84,7 @@ export default function Course() {
       </div>
       <hr/>
       <div className="d-flex justify-content-center">
-        <Visualiser data={tree} />
+        {(!course.courseId) ? <Loading/> : <Visualiser data={tree} />}
       </div>
       <hr/>
       <Cards data = {course}/>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Cards from "./cards";
 import Visualiser from "./visualiser";
+import Loading from "./loading";
 
 export default function Spk() {
   
@@ -62,7 +63,7 @@ export default function Spk() {
       </div>
       <hr/>
       <div className="d-flex justify-content-center">
-        <Visualiser data = {tree}/>
+        {(!spk.spkId) ? <Loading/> : <Visualiser data={tree} />}
       </div>
       <hr/>
       <Cards data = {spk}/>
