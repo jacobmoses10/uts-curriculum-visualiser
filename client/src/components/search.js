@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { ArrowUp } from "react-bootstrap-icons";
 
 const Course = (props) => (
   <tr>
@@ -62,7 +63,8 @@ export default function Search() {
         </tbody>
       </table>
       <div className="d-flex justify-content-center">
-        <button className="btn btn-primary" onClick={() => onClick()}>Load More</button>
+        <button className="btn btn-primary mx-2" onClick={() => onClick()}>Load More</button>
+        <button className="btn btn-primary" onClick={() => window.scrollTo(0, 0)}><ArrowUp/></button>
       </div>
     </div>
   );

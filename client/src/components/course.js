@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect} from "react";
 import { useParams } from "react-router";
 import Cards from "./cards";
 import Visualiser from "./visualiser";
@@ -83,7 +83,7 @@ export default function Course() {
       </div>
       <hr/>
       <div className="d-flex justify-content-center">
-        <Visualiser data = {tree}/>
+        <Visualiser data={tree} />
       </div>
       <hr/>
       <Cards data = {course}/>
