@@ -7,8 +7,9 @@ import { LinkHorizontal } from '@visx/shape';
 export default function Visualiser(data) {
   const defaultMargin = { top: 10, left: 80, right: 80, bottom: 10 };
   const treeData = useMemo(() => hierarchy(data.data), [data.data]);
-  const width = 1250;
   const navigate = useNavigate();
+
+  const width = (window.innerWidth < 700) ? window.innerWidth - 26 : window.innerWidth - 216;
   
   // Colours
   const blue = '#05d6f5';
@@ -156,7 +157,7 @@ export default function Visualiser(data) {
   return(
     <svg width={width} height={height}>
       <rect width={width} height={height} rx={14} fill={background} />
-      <Tree root={treeData} size={[height - 20, width - 200]}>
+      <Tree root={treeData} size={[height - 20, width - 150]}>
         {(tree) => (
           <Group top={defaultMargin.top} left={defaultMargin.left}>
             {tree.links().map((link, i) => (
