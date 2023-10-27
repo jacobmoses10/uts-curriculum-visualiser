@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Cards from "./cards";
+import Loading from "./loading";
 
 export default function Subject() {
   
@@ -68,9 +69,9 @@ export default function Subject() {
           <dt className="sm-2">Stage</dt>
           <dd className="sm-9">{subject.stage}</dd>
         </dl>
-      </div>
-      
+      </div>      
       <hr/>
+      {(!subject.subjectId) ? <Loading/> : <></>}
       <Cards data = {subject}/>
 
     </div>
