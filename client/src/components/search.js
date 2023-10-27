@@ -2,22 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowUp } from "react-bootstrap-icons";
 
-const Course = (props) => (
-  <tr>
-    <td>{props.course.courseId}</td>
-    <td>{props.course.fullTitle}</td>
-    <td>{props.course.courseTypeName}</td>
-    <td>{props.course.orgName}</td>
-    <td>
-      <Link className="btn btn-outline-primary" to={`/course/${props.course.courseId}`}>Select</Link>
-    </td>
-  </tr>
-);
-
 export default function Search() {
   const [courses, setCourses] = useState([]);
   const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(50);
+  const [hide, setHide] = useState(false);
+
+  const Course = (props) => (
+    <tr>
+      <td>{props.course.courseId}</td>
+      <td>{props.course.fullTitle}</td>
+      <td hidden={hide}>{props.course.courseTypeName}</td>
+      <td hidden={hide}>{props.course.orgName}</td>
+      <td>
+        <Link className="btn btn-outline-primary" to={`/course/${props.course.courseId}`}>Select</Link>
+      </td>
+    </tr>
+  );
 
   useEffect(() => {
 
@@ -27,6 +28,9 @@ export default function Search() {
       const courses = await response.json();
       setCourses(courses);
     }
+
+    // hide elements for mobile
+    (window.innerWidth < 700) ? setHide(true) : setHide(false);
     
     getCourses();
   }, [search, limit]);
@@ -51,8 +55,8 @@ export default function Search() {
           <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Type</th>
-            <th>Faculty</th>
+            <th hidden={hide}>Type</th>
+            <th hidden={hide}>Faculty</th>
             <th></th>
           </tr>
         </thead>

@@ -9,7 +9,7 @@ export default function Visualiser(data) {
   const treeData = useMemo(() => hierarchy(data.data), [data.data]);
   const navigate = useNavigate();
 
-  const width = (window.innerWidth < 600) ? window.innerWidth - 26 : window.innerWidth - 216;
+  const width = (window.innerWidth < 700) ? window.innerWidth - 26 : window.innerWidth - 216;
   
   // Colours
   const blue = '#05d6f5';

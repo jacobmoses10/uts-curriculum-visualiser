@@ -4,6 +4,16 @@ import img from "../img/home-page-img.png";
 
 export default function Home() {
 
+  function getImg() {
+    if (window.innerWidth > 700) {
+      return(
+        <div className="col p-3 d-flex justify-content-center">
+          <img src={img} alt="UTS CV" width="85%"/>
+        </div>
+      );
+    }
+  }
+
   return(
     <div className="container d-flex">
       <div className="col p-3">
@@ -29,9 +39,7 @@ export default function Home() {
           <Link className="btn btn-lg btn-outline-primary" to={`/search`}>Get Started</Link>
         </div>
       </div>
-      <div className="col p-3 d-flex justify-content-center">
-        <img src={img} alt="UTS CV" width="90%"/>
-      </div>      
+      {getImg()}     
     </div>
   );
 }
