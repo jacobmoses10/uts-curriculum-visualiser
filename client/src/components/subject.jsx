@@ -11,7 +11,7 @@ export default function Subject() {
 
   useEffect(() => {
     async function getSubject() {
-      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/subject/${params.id.toString()}`);
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/subject/${params.id.toString()}`);
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;

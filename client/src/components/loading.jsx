@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function Loading() {
-
   return(
     <div className="text-center text-primary mb-3">
       <div className="spinner-border" role="status">

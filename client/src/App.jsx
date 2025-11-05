@@ -3,10 +3,10 @@ import { Route, Routes } from "react-router-dom";
 
 import Navbar from "./components/navbar";
 import Home from "./components/home";
-import Search from "./components/search.js";
-import Course from "./components/course.js";
-import Spk from "./components/spk.js";
-import Subject from "./components/subject.js";
+import Search from "./components/search";
+import Course from "./components/course";
+import Spk from "./components/spk";
+import Subject from "./components/subject";
 import Footer from "./components/footer";
 
 const App = () => {
