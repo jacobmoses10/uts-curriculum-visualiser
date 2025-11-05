@@ -13,8 +13,8 @@ export default function Course() {
   
   useEffect(() => {
     async function getCourse() {
-      const courseResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/course/${params.id.toString()}`);
-      const treeResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/course/tree/${params.id.toString()}`);
+      const courseResponse = await fetch(`${import.meta.env.VITE_BASE_URL}/course/${params.id.toString()}`);
+      const treeResponse = await fetch(`${import.meta.env.VITE_BASE_URL}/course/tree/${params.id.toString()}`);
       const course = await courseResponse.json();   
       const tree = await treeResponse.json();   
       setCourse(course);
@@ -91,4 +91,3 @@ export default function Course() {
     </div>
   );
 }
-

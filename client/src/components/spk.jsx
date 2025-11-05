@@ -13,11 +13,11 @@ export default function Spk() {
 
   useEffect(() => {
     async function getSpk() {
-      const spkResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/spk/${params.id.toString()}`);
+      const spkResponse = await fetch(`${import.meta.env.VITE_BASE_URL}/spk/${params.id.toString()}`);
       const spk = await spkResponse.json();
       setSpk(spk);
 
-      const treeResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/spk/tree/${params.id.toString()}`);
+      const treeResponse = await fetch(`${import.meta.env.VITE_BASE_URL}/spk/tree/${params.id.toString()}`);
       const tree = await treeResponse.json();
       setTree(tree);
     }

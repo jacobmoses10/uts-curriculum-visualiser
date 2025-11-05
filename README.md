@@ -12,7 +12,7 @@ PORT=4000
 
 Create another `.env` file in the client folder and add the Server URL.
 ```
-REACT_APP_BASE_URL=http://localhost:4000
+VITE_BASE_URL=http://localhost:4000
 ```
 
 Start the server:
@@ -22,9 +22,9 @@ npm i
 npm start
 ```
 
-Start the client:
+Start the client (Vite):
 ```
 cd client
 npm i
-npm start
+npm run dev
 ```
